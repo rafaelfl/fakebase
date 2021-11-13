@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Olá mundo!</h1>
+    <input type="text" name="username" id="username">
+    <input type="button" id="botao" value="Clique aqui" onclick="sendMsg()" />
+</body>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+
+    socket.on("boasvindas", (data) => {
+        document.getElementById('username').value = data;
+    });
+
+    // socket.emit("teste", new Date().toString());
+
+    // function sendMsg() {
+    //     var socket = io();
+
+    //     // var username = document.getElementById('username').value;
+
+    //     // socket.emit('teste', {
+    //     //   username: username,
+    //     //   message: "Olá!"
+    //     // });
+
+        
+    // }
+</script>
+
+</html>

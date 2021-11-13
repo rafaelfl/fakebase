@@ -1,0 +1,18 @@
+{
+  "name": "fakebase",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/rafaelfl/fakebase.git",
+  "author": "Rafael Fernandes Lopes <rafael.fernandes@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start" : "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^4.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
