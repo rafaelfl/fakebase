@@ -8,17 +8,71 @@
 </head>
 <body>
     <h1>Olá mundo!</h1>
-    <input type="text" name="username" id="username">
-    <input type="button" id="botao" value="Clique aqui" onclick="sendMsg()" />
+    <input type="text" name="updatePath" id="updatePath">
+    <input type="text" name="updateValue" id="updateValue">
+    <input type="button" value="Update database" onclick="updateDatabase()" />
+    <input type="button" value="Replace (set) database" onclick="changeDatabase()" />
+    <div id="database"></div>
 </body>
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
     var socket = io();
 
-    socket.on("boasvindas", (data) => {
-        document.getElementById('username').value = data;
+    let database = {};
+
+    socket.on("database", (data) => {
+        switch (data.eventType) {
+            case "getResponse": database = data.database;
+                document.getElementById('database').textContent = JSON.stringify(database);
+                break;
+
+            case "updateResponse": database = data.database;
+                document.getElementById('database').textContent = JSON.stringify(database);
+                break;
+            
+            case "setResponse": console.log(data.result);
+                break;
+
+            case "updateResponse": console.log(data.result);
+                break;
+        }
     });
+
+    socket.emit("database", {
+        eventType: "getRequest",
+    });
+
+    function changeDatabase() {
+        socket.emit("database", {
+            eventType: "setRequest",
+            database: {
+                "marguerita": {
+                    amount: 3,
+                    price: 5,
+                },
+                "ham": {
+                    amount: 2,
+                    price: 3,
+                },
+            },
+        });
+    }
+
+    function updateDatabase() {
+        const updatePath = document.getElementById('updatePath').value;
+        const updateValue = document.getElementById('updateValue').value;
+
+        socket.emit("database", {
+            eventType: "updateRequest",
+            updatePath,
+            updateValue,
+        });
+    }
+
+    // socket.on("boasvindas", (data) => {
+    //     document.getElementById('username').value = data;
+    // });
 
     // socket.emit("teste", new Date().toString());
 

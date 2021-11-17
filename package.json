@@ -6,9 +6,10 @@
   "author": "Rafael Fernandes Lopes <rafael.fernandes@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start" : "nodemon index.js"
+    "start": "node index.js"
   },
   "dependencies": {
+    "chokidar": "^3.5.2",
     "express": "^4.17.1",
     "socket.io": "^4.3.2"
   },
